@@ -1,9 +1,12 @@
 #include <SoftwareSerial.h>
 
 SoftwareSerial serial (2, 3);
+SoftwareSerial blue(0, 1);
 
-String data;
+char data;
 int byteReceived ;
+char receive = 0;
+
 
 void setup() {
   Serial.begin(9600);
@@ -12,11 +15,7 @@ void setup() {
 }
 
 void loop () {
-  if (Serial.available())
-  {
-    byteReceived = Serial.read();
-    serial.write(byteReceived);
-  }
+bluetooth();
 }
 /*
   void ultrasonic_1 () {
@@ -54,3 +53,12 @@ void loop () {
 
   distance = duration / 58.2;
   }*/
+
+void bluetooth() {
+  if (Serial.available())
+  {
+    data = Serial.read();
+    Serial.println(data);  
+    serial.write(data);
+  }
+}

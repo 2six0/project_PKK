@@ -11,6 +11,7 @@ AF_DCMotor motor4(4);
 int kec = 255;
 String input, data;
 int int1;
+char c[5];
 
 void setup() {
   Serial.begin(9600);
@@ -27,19 +28,19 @@ void loop() {
 
   switch (int1)
   {
-    case 'w':
+    case 'F':
       forward();
       break;
-    case 's':
+    case 'B':
       backward();
       break;
-    case 'a':
+    case 'L':
       left();
       break;
-    case 'd':
+    case 'R':
       right();
       break;
-    case 'c':
+    case 'S':
       rest();
       break;
   }
@@ -83,11 +84,17 @@ void rest() {
   motor2.run(RELEASE);
   motor3.run(RELEASE);
   motor4.run(RELEASE);
-  Serial.println("RELEASEI");
+  Serial.println("RELEASE");
 }
 
 void komunikasi () {
-  while (serial.available() > 0) {
-    int1 = serial.read();
-  }
+  if(serial.available())
+   {
+      //char c = serial.read();
+      int1 = serial.read();
+      Serial.println(int1);
+      //Serial.println("Data Yang Masuk Dari Control = ", c);
+   }
+   /*int1 = (int)c;
+   Serial.println(int1); */
 }
